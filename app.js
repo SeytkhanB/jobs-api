@@ -17,6 +17,7 @@ const swaggerDocument = YAML.load("./swagger.yaml");
 const app = express();
 dotenv.config();
 
+app.use(express.static("./public"));
 app.set("trust proxy", 1);
 app.use(
   rateLimit({
@@ -26,14 +27,11 @@ app.use(
 );
 app.use(express.json());
 // security packages
-app.use(helmet()); // It sets up various HTTP headers to prevent attacks like Cross-Site-Scripting(XSS), clickjacking, etc.
+app.use(helmet()); // It sets up various HTTP headers to prevent attacks like Cross-Site-Scripting(XSS), click jacking, etc.
 app.use(cors()); // Cross-origin resource sharing (CORS) allows AJAX requests to skip the Same-origin policy and access resources from remote hosts.
 // By installing and implementing "CORS" package, we make our API accessible to the public
 app.use(xss()); // Node.js Connect middleware to sanitize user input coming from POST body, GET queries, and url params. Works with Express, Restify, or any other Connect app.
 
-app.get("/", (req, res) => {
-  res.send('<h1>Jobs API</h1><a href="/api-docs">Documentation</a>');
-});
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // routes

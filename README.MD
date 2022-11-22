@@ -1,9 +1,10 @@
 #### Project Setup
 
-In order to spin up the project, in the root create .env with these two variables, with your own values.
+In order to spin up the project, in the root create .env with four variables, with your own values.
 
+PORT
 MONGO_URI
-JWT_SECRET
+JWT_SECRET_KEY
 JWT_LIFETIME
 
 After that run this command
